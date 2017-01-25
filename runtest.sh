@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-while getopts "i:o:s:" opt; do
+while getopts "i:o:s:m:" opt; do
 case $opt in
 i) SOURCE="$OPTARG"
 ;;
@@ -19,8 +19,9 @@ mkdir -p resize
 FILES=${SOURCE}/*
 for f in $FILES
 do
-  echo "Processing $f file..."
-  convert {SOURCE} -resize {SIZE}x{SIZE}^ -gravity center -extent {SIZE}x{SIZE} resize/{SOURCE}
+	filename=$(basename "$f")
+  	echo "Processing $filename file..."  
+  	convert ${f} -resize ${SIZE}x${SIZE}^ -gravity center -extent ${SIZE}x${SIZE} resize/${filename}
 done
 
 th testbatch.lua -input_path resize -model_t7 ${MODEL} -save_path ${OUTPUT}
