@@ -3,6 +3,8 @@ require 'image'
 require 'InstanceNormalization'
 require 'src/utils'
 
+local lfs = require "lfs"
+
 local cmd = torch.CmdLine()
 
 cmd:option('-input_path', '', 'Paths of image to stylize.')
